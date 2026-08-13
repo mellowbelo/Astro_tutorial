@@ -1,5 +1,21 @@
 ---
+const pageTitle = "About Me";
+const identity = {
+    firstName: "Alejandro",
+    country: "USA",
+    occupation: "Web Developer, and Construction Inspector",
+    hobbies: ["Coding", "Gaming", "Photography", "Traveling"],
+};
 
+const skills = ["HTML", "CSS", "JavaScript", "React", "Vue", "Node.js", "Python"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "crimson";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -9,17 +25,47 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>About Me</title>
+		<title>{pageTitle}</title>
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill{
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
 	</head>
 	<body>
         <a href="/">Home</a>
         <a href="/about/">About</a>
         <a href="/blog/">Blog</a>
 
-		<h1>About Me</h1>
+		<h1>{pageTitle}</h1>
 		<h2>My new astro site that seems pretty cool!</h2>
 
         <p>My name is Alejandro, and I am a web developer with a passion for creating beautiful and functional websites. I have experience in various web technologies, including HTML, CSS, JavaScript, and modern frameworks like React and Vue. In my free time, I enjoy exploring new technologies and contributing to open-source projects.</p>
+
+        <p> Here are a few facts about me:</p>
+        <ul>
+            <li> My name is {identity.firstName}.</li>
+            <li> I live in {identity.country} and work as a {identity.occupation}.</li>
+            {identity.hobbies.length >= 2 &&
+                <li> My hobbies include {identity.hobbies[0]} and {identity.hobbies[1]}.</li>
+            }
+        </ul>
+        <p> Here are some of my skills:</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}    
+        </ul>    
+
+        {happy && <p>I am happy to be learning Astro!</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
 
         <p> This site will update as I continue to develop it.</p>
 	</body>
